@@ -1,0 +1,20 @@
+
+version: 1.0.{build}
+image: Visual Studio 2019
+
+environment:
+  nodejs_version: "14" 
+
+install:
+  - ps: npm install
+
+build_script:
+  - ps: npm run build
+
+deploy:
+  - provider: GitHubPages
+    auth_token:
+      secure: 
+    project: 
+    on:
+      branch: main

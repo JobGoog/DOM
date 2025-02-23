@@ -1,0 +1,16 @@
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    width: max-content;
+  }
+  
+  .grid-cell {
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  
