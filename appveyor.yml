@@ -11,8 +11,8 @@ build_script:
   - ps: npm run build
 
 after_build:
-  - ps:  |
-      git clone --quiet "https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git" gh-pages
+  - ps: |
+      git clone --quiet "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" gh-pages
       Set-Location gh-pages
       git checkout gh-pages 2>$null
       if ($LASTEXITCODE -ne 0) {
@@ -20,8 +20,8 @@ after_build:
       }
       Remove-Item * -Recurse -Force
       Copy-Item ..\dist\* . -Recurse
-      git config user.email roro425052@gmail.com
-      git config user.name JobGoog
+      git config user.email "roro425052@gmail.com"
+      git config user.name "JobGoog"
       git add --all .
       git commit -m "Deploy to GitHub Pages [skip ci]"
-      git push --force origin HEAD:gh-pages
+      git push --force "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" HEAD:gh-pages
