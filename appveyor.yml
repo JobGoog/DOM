@@ -19,22 +19,9 @@ build: off
 build_script:
   - ps: npm run build # команда сборки
 
-deploy_script: # скрипт развёртывания
-  - ps: |
-      if ($env:APPVEYOR_REPO_BRANCH -eq 'main' -and $env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) {
-        git config --global user.email "ci@appveyor.com"
-        git config --global user.name "AppVeyor"
-        git clone https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git out
-        cd out
-        if (git rev-parse --verify gh-pages) {
-          git checkout gh-pages
-        } else {
-          git checkout --orphan gh-pages
-        }
-        Remove-Item * -Recurse -Force
-        Copy-Item ..\dist\* . -Recurse -Force
-        git add .
-        git commit -m "Update GitHub Pages [skip ci]"
-        git push origin HEAD:refs/heads/gh-pages --force
-      } 
-
+deploy_script:
+  - git config --global credential.helper store
+  - git config --global user.email roro425052@gmail.com
+  - git config --global user.name JobGoog
+  - echo "https://$GITHUB_TOKEN:x oauth-basic@github.com" > ~/.git-credentials
+  - npx gh-pages -d dist -u "appveyor-bot <roro425052>"
