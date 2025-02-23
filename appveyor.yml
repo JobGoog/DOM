@@ -24,4 +24,4 @@ after_build:
       git config user.name JobGoog
       git add --all .
       git commit -m "Deploy to GitHub Pages [skip ci]"
-      git push --force origin gh-pages
+      git push --force origin HEAD:gh-pages
