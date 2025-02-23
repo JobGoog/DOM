@@ -11,11 +11,11 @@ build_script:
   - ps: npm run build
 
 after_build:
-  - ps: >
-      git clone --quiet --branch=gh-pages "https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git" gh-pages &&
-      cd gh-pages &&
-      rm -rf * &&
-      cp -R ../dist/* . &&
-      git add --all . &&
-      git commit -m "Deploy to GitHub Pages [skip ci]" &&
+  - ps: |
+      git clone --quiet --branch=gh-pages "https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git" gh-pages
+      Set-Location gh-pages
+      Remove-Item * -Recurse -Force
+      Copy-Item ..\dist\* . -Recurse
+      git add --all .
+      git commit -m "Deploy to GitHub Pages [skip ci]"
       git push --force origin gh-pages
