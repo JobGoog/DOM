@@ -11,9 +11,13 @@ build_script:
   - ps: npm run build
 
 after_build:
-  - ps: |
-      git clone --quiet --branch=gh-pages "https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git" gh-pages
+  - ps:  |
+      git clone --quiet "https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git" gh-pages
       Set-Location gh-pages
+      git checkout gh-pages 2>$null
+      if ($LASTEXITCODE -ne 0) {
+          git checkout --orphan gh-pages
+      }
       Remove-Item * -Recurse -Force
       Copy-Item ..\dist\* . -Recurse
       git add --all .
