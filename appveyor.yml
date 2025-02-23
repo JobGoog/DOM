@@ -10,7 +10,7 @@ branches:
 
 cache: 
   - node_modules 
-  
+
 install:
   - ps: npm install 
 
@@ -24,4 +24,4 @@ deploy_script:
   - git config --global user.email roro425052@gmail.com
   - git config --global user.name JobGoog
   - echo "https://$GITHUB_TOKEN:x oauth-basic@github.com" > ~/.git-credentials
-  - npx gh-pages -d dist -u "appveyor-bot <roro425052>"
+  - npx gh-pages -d dist -u "jobgoog <roro425052@gmail.com>"
