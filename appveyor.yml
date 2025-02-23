@@ -24,4 +24,4 @@ after_build:
       git config user.name "JobGoog"
       git add --all .
       git commit -m "Deploy to GitHub Pages [skip ci]"
-      git push --force "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" HEAD:gh-pages
+      git push --force "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" HEAD:refs/heads/gh-pages
