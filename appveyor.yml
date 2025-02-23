@@ -2,7 +2,7 @@ version: 1.0.{build}
 image: Visual Studio 2019
 
 environment:
-  nodejs_version: "14" 
+  nodejs_version: "14"
 
 install:
   - ps: npm install
@@ -11,9 +11,14 @@ build_script:
   - ps: npm run build
 
 deploy:
-  - provider: GitHubPages
-    auth_token:
-      secure: k7KHFn/Y8fNJl2Ap6LXplxIy9+SY9QV+F6TCF3yfdpt63eLjK2guwr+8x3T851i1
-    project: JobGoog/DOM
-    on:
-      branch: main
+  provider: script
+  script: >
+    git clone --quiet --branch=gh-pages "https://%GITHUB_TOKEN%@github.com/jobgoog/DOM.git" gh-pages &&
+    cd gh-pages &&
+    rm -rf * &&
+    cp -R ../dist/* . &&
+    git add --all . &&
+    git commit -m "Deploy to GitHub Pages [skip ci]" &&
+    git push --force origin gh-pages
+  on:
+    branch: main
