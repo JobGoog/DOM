@@ -1,1 +1,1 @@
-.grid-cell{border:1px solid #000;display:inline-block;height:50px;width:50px}
+#grid{display:grid;gap:5px;grid-template-columns:repeat(4,120px);grid-template-rows:repeat(4,120px);margin:20px auto;width:max-content}.grid-cell{border:2px solid #000;height:120px;position:relative;width:120px}
