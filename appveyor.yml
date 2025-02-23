@@ -20,6 +20,8 @@ after_build:
       }
       Remove-Item * -Recurse -Force
       Copy-Item ..\dist\* . -Recurse
+      git config user.email roro425052@gmail.com
+      git config user.name JobGoog
       git add --all .
       git commit -m "Deploy to GitHub Pages [skip ci]"
       git push --force origin gh-pages
