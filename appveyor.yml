@@ -13,7 +13,7 @@ build_script:
 deploy:
   - provider: GitHubPages
     auth_token:
-      secure: "YOUR_GITHUB_TOKEN"  # Замените на ваш токен доступа
-    project: JobGoog/DOM22
+      secure: "k7KHFn/Y8fNJl2Ap6LXplxIy9+SY9QV+F6TCF3yfdpt63eLjK2guwr+8x3T851i1"
+    project: JobGoog/DOM
     on:
       branch: main
