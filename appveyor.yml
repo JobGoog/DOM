@@ -10,20 +10,10 @@ install:
 build_script:
   - ps: npm run build
 
-artifacts:
-  - path: dist
-    name: build
-
-deploy_script:
-  - ps: |
-      if ($env:APPVEYOR_REPO_BRANCH -eq 'main' -and $env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) {
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        git clone --branch=gh-pages https://%GITHUB_TOKEN%@github.com/JobGoog/DOM.git out
-        cd out
-        del * /Q
-        copy ..\dist\* . /Y
-        git add .
-        git commit -m "Update GitHub Pages [skip ci]"
-        git push origin gh-pages
-      }
+deploy:
+  - provider: GitHubPages
+    auth_token:
+      secure: k7KHFn/Y8fNJl2Ap6LXplxIy9+SY9QV+F6TCF3yfdpt63eLjK2guwr+8x3T851i1
+    project: JobGoog/DOM
+    on:
+      branch: main
