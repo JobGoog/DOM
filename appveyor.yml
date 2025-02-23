@@ -35,5 +35,6 @@ deploy_script: # скрипт развёртывания
         Copy-Item ..\dist\* . -Recurse -Force
         git add .
         git commit -m "Update GitHub Pages [skip ci]"
-        git push origin gh-pages --force
-      }
+        git push origin HEAD:refs/heads/gh-pages --force
+      } 
+
