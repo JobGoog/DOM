@@ -10,7 +10,7 @@ module.exports = {
       sourceType: 'module'
     },
     rules: {
-      "no-console": "off" // Вы можете изменить или добавить правила по необходимости
+      "no-console": "off" 
     }
   };
   

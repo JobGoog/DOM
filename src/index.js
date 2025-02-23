@@ -21,31 +21,3 @@ function getRandomIndex(excludeIndex) {
   } while (randomIndex === excludeIndex);
   return randomIndex;
 }
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  createGrid();
-
-  
-  const img = document.createElement('img');
-  img.src = characterImage;
-  img.alt = 'Персонаж';
-
-  
-  currentCellIndex = Math.floor(Math.random() * GRID_SIZE);
-  let currentCell = gridContainer.querySelector(`[data-index="${currentCellIndex}"]`);
-  currentCell.appendChild(img);
-
-  
-  function moveCharacter() {
-    const newIndex = getRandomIndex(currentCellIndex);
-    const newCell = gridContainer.querySelector(`[data-index="${newIndex}"]`);
-    
-    newCell.appendChild(img);
-    currentCellIndex = newIndex;
-  }
-
-  
-  setInterval(moveCharacter, 1000);
-});
