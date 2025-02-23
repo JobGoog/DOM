@@ -6,18 +6,18 @@ environment:
 
 branches:
   only:
-    - main # ветка git
+    - main 
 
 cache: 
-  - node_modules # кеширование
-
+  - node_modules 
+  
 install:
-  - ps: npm install # команда установки зависимостей
+  - ps: npm install 
 
 build: off
 
 build_script:
-  - ps: npm run build # команда сборки
+  - ps: npm run build 
 
 deploy_script:
   - git config --global credential.helper store
