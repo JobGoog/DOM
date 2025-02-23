@@ -14,7 +14,7 @@ build_script:
 deploy:
   - provider: GitHubPages
     auth_token:
-      secure: bvqa4m1y81cn0jv0nvau
+      secure: 
     project: JobGoog/DOM22
     on:
       branch: main
