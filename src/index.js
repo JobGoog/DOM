@@ -14,7 +14,6 @@ function createGrid() {
   }
 }
 
-
 function getRandomIndex(excludeIndex) {
   let randomIndex;
   do {
@@ -22,6 +21,7 @@ function getRandomIndex(excludeIndex) {
   } while (randomIndex === excludeIndex);
   return randomIndex;
 }
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
