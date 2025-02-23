@@ -17,14 +17,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'assets/[name].[hash].[ext]'
-            }
-          }
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name].[hash][ext]'
+        }
       },
       {
         test: /\.css$/,

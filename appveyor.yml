@@ -4,24 +4,36 @@ image: Visual Studio 2019
 environment:
   nodejs_version: "14"
 
+branches:
+  only:
+    - main # ветка git
+
+cache: 
+  - node_modules # кеширование
+
 install:
-  - ps: npm install
+  - ps: npm install # команда установки зависимостей
+
+build: off
 
 build_script:
-  - ps: npm run build
+  - ps: npm run build # команда сборки
 
-after_build:
+deploy_script: # скрипт развёртывания
   - ps: |
-      git clone --quiet "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" gh-pages
-      Set-Location gh-pages
-      git checkout gh-pages 2>$null
-      if ($LASTEXITCODE -ne 0) {
+      if ($env:APPVEYOR_REPO_BRANCH -eq 'main' -and $env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) {
+        git config --global user.email "ci@appveyor.com"
+        git config --global user.name "AppVeyor"
+        git clone https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git out
+        cd out
+        if (git rev-parse --verify gh-pages) {
+          git checkout gh-pages
+        } else {
           git checkout --orphan gh-pages
+        }
+        Remove-Item * -Recurse -Force
+        Copy-Item ..\dist\* . -Recurse -Force
+        git add .
+        git commit -m "Update GitHub Pages [skip ci]"
+        git push origin gh-pages --force
       }
-      Remove-Item * -Recurse -Force
-      Copy-Item ..\dist\* . -Recurse
-      git config user.email "roro425052@gmail.com"
-      git config user.name "JobGoog"
-      git add --all .
-      git commit -m "Deploy to GitHub Pages [skip ci]"
-      git push --force "https://$env:GITHUB_TOKEN@github.com/JobGoog/DOM.git" HEAD:refs/heads/gh-pages
